@@ -12,13 +12,13 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class RabbitMqConsumerPublisher {
 
-    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = "default", durable = "false"), exchange = @Exchange(value = RabbitMqConfig.TOPIC_EXCHANGE_NAME, ignoreDeclarationExceptions = "true", type = "topic"), key = "default.#"))
-    public void receiveMessage(String message) {
-        log.info("msg received: {}", message);
+    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = "rabbitMqDefault", durable = "false"), exchange = @Exchange(value = RabbitMqConfig.TOPIC_EXCHANGE_NAME, ignoreDeclarationExceptions = "true", type = "topic"), key = "rabbitMqDefault.#"))
+    public void receiveMessage(String msg) {
+        log.info("msg received: {}", msg);
     }
 
-    public void publishToKafka(String message) {
-        log.info("msg published: {}", message);
+    public void publishToKafka(String msg) {
+        log.info("msg published: {}", msg);
         // TODO: publish to kafka
     }
 }
