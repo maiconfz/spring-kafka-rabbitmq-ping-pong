@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: spring.application.name=spring-kafka-rabbitmq-ping-pong
+
+  amqp:
+    deserialization:
+      trust:
+        all: true
