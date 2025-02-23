@@ -6,3 +6,6 @@ spring:
     deserialization:
       trust:
         all: true
+  
+  kafka:
+    bootstrap-servers: localhost:9092
