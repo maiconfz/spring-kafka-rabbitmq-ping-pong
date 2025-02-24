@@ -1,13 +1,12 @@
 package io.maiconfz.spring_kafka_rabbitmq_ping_pong;
 
-import java.util.stream.IntStream;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import io.maiconfz.spring_kafka_rabbitmq_ping_pong.rabbitmq.RabbitMqConsumerPublisher;
+import io.maiconfz.spring_kafka_rabbitmq_ping_pong.model.builder.PingPongMsgBuilder;
+import io.maiconfz.spring_kafka_rabbitmq_ping_pong.rabbitmq.RabbitMqPublisher;
 import lombok.extern.log4j.Log4j2;
 
 @SpringBootApplication
@@ -20,8 +19,8 @@ public class App {
 	}
 
 	@Bean
-	public CommandLineRunner rabbitMqPublishToKafka(final RabbitMqConsumerPublisher publisher) {
-		return args -> IntStream.range(0, 2).parallel().forEach(i -> publisher.publishToKafka("Hello Queue " + i));
+	public CommandLineRunner publishFirstMsg(final RabbitMqPublisher publisher) {
+		return args -> publisher.publish(PingPongMsgBuilder.newPingMsg());
 	}
 
 }

@@ -1,11 +1,7 @@
 spring:
   application:
     name: spring.application.name=spring-kafka-rabbitmq-ping-pong
-
-  amqp:
-    deserialization:
-      trust:
-        all: true
   
   kafka:
     bootstrap-servers: localhost:9092
+      
