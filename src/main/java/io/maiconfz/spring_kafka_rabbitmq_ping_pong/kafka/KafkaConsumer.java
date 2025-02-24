@@ -17,7 +17,7 @@ public class KafkaConsumer {
     private final RabbitMqPublisher rabbitMqPublisher;
 
     @KafkaListener(topics = KafkaConfig.DEFAULT_TOPIC_NAME, containerFactory = "msgKafkaListenerContainerFactory")
-    public void receiveMessage(Msg msg) {
+    public void receiveMessage(Msg msg) throws InterruptedException {
         log.info("Received Message: {} ", msg);
         rabbitMqPublisher.publish(PingPongMsgBuilder.PING.equals(msg.getText()) ? PingPongMsgBuilder.newPongMsg()
                 : PingPongMsgBuilder.newPingMsg());

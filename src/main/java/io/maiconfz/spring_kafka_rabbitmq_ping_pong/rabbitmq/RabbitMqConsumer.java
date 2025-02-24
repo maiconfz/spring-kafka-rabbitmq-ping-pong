@@ -21,7 +21,7 @@ public class RabbitMqConsumer {
 
     @RabbitListener(bindings = @QueueBinding(value = @Queue(value = RabbitMqConfig.DEFAULT_QUEUE_NAME, durable = "false"), exchange = @Exchange(value = RabbitMqConfig.DEFAULT_TOPIC_EXCHANGE_NAME, ignoreDeclarationExceptions = "true", type = "topic"), key = RabbitMqConfig.DEFAULT_QUEUE_NAME
             + ".#"))
-    public void receiveMessage(Msg msg) {
+    public void receiveMessage(Msg msg) throws InterruptedException {
         log.info("msg received: {}", msg);
         kafkaPublisher.publish(PingPongMsgBuilder.PING.equals(msg.getText()) ? PingPongMsgBuilder.newPongMsg()
                 : PingPongMsgBuilder.newPingMsg());
